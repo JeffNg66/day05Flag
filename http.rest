@@ -1,0 +1,1 @@
+GET http://newsapi.org/v2/top-headlines?q=covid&category=General&country=us&apiKey=b66ccfb3ca484c7da4fffe2695578336
