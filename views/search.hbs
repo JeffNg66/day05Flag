@@ -1,13 +1,19 @@
 <h3>Your search for {{ searchstr }}</h3>
-<a href="/">Home</a>
 
 {{#if hasContent}}
     {{#each news_dis}}
         <div>
             <h5>{{ this.title }}</h5>
             <img src="{{ this.urltoimage }}" alt="" width="100%">
-            {{ this.newsDate}}
-            <a href="{{ this.url }}" target="_blank" class="text-left">Read more</a>
+            <p>{{ this.summary }}</p>
+            <div class="row">
+                <div class="col">
+                {{ this.newsDate}}
+                </div>
+                <div class="col text-right">
+                    <a href="{{ this.url }}" target="_blank">Read more</a>
+                </div>
+            </div>
             <hr>
         </div>
     {{/each}}

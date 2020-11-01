@@ -29,29 +29,30 @@ app.use(express.static(__dirname + '/images'))
 
 
 // configure app
+
 app.get('/', (req, resp) => {
     resp.status(200)
     resp.type('text/html')
     resp.render('index')
 })
 
-app.post('/',
-    express.urlencoded({extended: true}),
+app.get('/getNews',
+    //express.urlencoded({extended: true}),
     async (req, resp) => {
-        //console.info('body: ', req.body)
-        const searchstr = req.body.search
+        //console.info('body: ', req.query.search)
+        const searchstr = req.query.search
         const url = withQuery(
             endPoint,
             {
-                q: req.body.search,
-                category: req.body.category,
-                country: req.body.country,
+                q: req.query.search,
+                category: req.query.category,
+                country: req.query.country,
                // apiKey: API_KEY
 
             }
         )
         console.info(url)
-        
+      
         const headers = {
             'X-Api-Key': API_KEY
         }
@@ -70,7 +71,8 @@ app.post('/',
                         title: v.title,
                         url: v.url,
                         urltoimage: v.urlToImage,
-                        newsDate:   v.publishedAt
+                        newsDate: v.publishedAt,
+                        summary: v.description  
                     }
                 })
                 //console.info(news_dis)
@@ -84,7 +86,7 @@ app.post('/',
         } catch(e) {
             console.error('Error ', e)
             return Promise.reject(e)
-        }
+        } 
     }
 )
 
